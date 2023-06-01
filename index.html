@@ -5,23 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link red="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <title>JS Library</title>
 </head>
 
 <body>
-    <div class="container">
+    <div class="form hidden">
         <h1>New Book Form</h1>
-        <form action="">
-            <label for="title">Title</label><input type="text">
-            <label for="author"></label>Author<input type="text">
-            <label for="pages"></label>pages<input type="number">
-            <label for="read">Have you read?</label>
-            <input type="button"></input>
-        </form>
+        <form id="form-div" action="">
+            <label for="title">Title</label><input type="text" id="title">
+            <label for="author"></label>Author<input type="text" id="author">
+            <label for="pages"></label>pages<input type="number" id="pages">
+            <label for="read">Have you read?</label><input type="checkbox" id="read"></input>
+            <input type="submit" value="Submit">
 
+        </form>
+    </div>
+    <div class="container">
         <h1>Library</h1>
-        <div class="library"></div>
+        <button id="add">Add Book</button>
+        <div class="library">
+        </div>
     </div>
 
     <script src="script.js"></script>

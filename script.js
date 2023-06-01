@@ -1,11 +1,30 @@
 let myLibrary = [];
-let a = new Book("penis", "penis", 2, true)
-let b = new Book("cock", "cock", 1, false);
-myLibrary.push(a);
-myLibrary.push(b);
+let a = new Book("Things We Never Got Over", "Lucy Score", 102, true)
+let b = new Book("The Power of Now: A Guide to Spiritual Enlightenment", "Eckhart Tolle", 236, false);
+let c = new Book("Power vs. Force","David R. Hawkins", 341, false);
 addBookToLibrary(a);
-addBookToLibrary("cock", "cock", 1, false);
+addBookToLibrary(b);
+addBookToLibrary(c);
+displayLibrary();
 
+let button = document.querySelector("#add");
+button.addEventListener("click", function () {
+    let form = document.querySelector(".form")
+    form.classList.toggle("hidden");
+})
+
+let form = document.querySelector("#form-div");
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    console.log("hi")   
+    const title = document.getElementById("title");
+    const author = document.getElementById("author");
+    const pages = document.getElementById("pages");
+    const read = document.getElementById("read")
+    let book = new Book(title.value, author.value, pages.value, read.checked);
+    addBookToLibrary(book);
+    displayLibrary();
+})
 
 function Book(title, author, pages, read) {
     // the constructor...
@@ -14,14 +33,19 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
 }
+function clearLibrary() {
+    let bookDiv = document.querySelector(".library");
+    while (bookDiv.hasChildNodes()){
+        bookDiv.removeChild(bookDiv.firstChild);
+    } 
+}
 
 function displayLibrary() {
+    clearLibrary();
     let bookDiv = document.querySelector(".library");
-    console.log(bookDiv);
     myLibrary.forEach(book => {
         let newBook = document.createElement("div");
         newBook.textContent = `Title: ${book.title}, Author: ${book.author}, Pages: ${book.pages}, Read: ${book.read}`;
-        console.log(newBook.textContent);
         bookDiv.appendChild(newBook);
     });
 }
