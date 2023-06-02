@@ -7,10 +7,55 @@ addBookToLibrary(b);
 addBookToLibrary(c);
 displayLibrary();
 
+
+
+function Book(title, author, pages, read) {
+    // the constructor...
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+}
+
 let button = document.querySelector("#add");
 button.addEventListener("click", function () {
     let form = document.querySelector(".form")
     form.classList.toggle("hidden");
+})
+
+
+let library = document.querySelector(".library");
+library.addEventListener("click", function (event) {
+    if (event.target.classList.contains("delete")) {
+        const deleteButton = event.target;
+        const bookDiv = deleteButton.parentElement;
+        const index = Array.from(bookDiv.parentNode.children).indexOf(bookDiv);
+
+        // Remove the corresponding book from the library array
+        myLibrary.splice(index, 1);
+
+        // Update the displayed library
+        displayLibrary();
+    }
+
+})
+
+function changeRead(index) {
+    let book = myLibrary[index];
+    let status = book["read"];
+    book["read"] = !status;
+    clearLibrary();
+    displayLibrary();
+}
+
+library.addEventListener("click", function (event) {
+    const readButton = event.target;
+    const bookDiv = readButton.parentNode;
+    const index = Array.from(bookDiv.parentNode.children).indexOf(bookDiv);
+
+    console.log(myLibrary[index]);
+    changeRead(index);
+    console.log(myLibrary[index])
 })
 
 
@@ -29,13 +74,8 @@ form.addEventListener("submit", function (event) {
     divform.classList.toggle("hidden");
 })
 
-function Book(title, author, pages, read) {
-    // the constructor...
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
+
+
 
 
 function clearLibrary() {
@@ -50,20 +90,26 @@ function displayLibrary() {
     let bookDiv = document.querySelector(".library");
     myLibrary.forEach(book => {
         let newBook = document.createElement("div");
-        newBook.textContent = `Title: ${book.title}, Author: ${book.author}, Pages: ${book.pages}, Read: ${book.read}`;
+        let p = document.createElement("p");
+        p.textContent = `Title: ${book.title}, Author: ${book.author}, Pages: ${book.pages}, Read: ${book.read}`;
 
 
         let deletebutton = document.createElement("button");
         deletebutton.innerText = "Delete Entry";
         deletebutton.classList.add("delete");
 
+
         let readbutton = document.createElement("button");
         readbutton.innerText = "read";
+
+        newBook.appendChild(p)
+        newBook.appendChild(deletebutton)
+        newBook.appendChild(readbutton)
         bookDiv.appendChild(newBook);
-        bookDiv.appendChild(deletebutton);
-        bookDiv.appendChild(readbutton);
     });
 }
+
+
 
 function addBookToLibrary(titleOrBook, author, pages, read) {
     if (typeof titleOrBook === 'object') {
@@ -73,3 +119,6 @@ function addBookToLibrary(titleOrBook, author, pages, read) {
         myLibrary.push(book);
     }
 }
+
+
+
