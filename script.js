@@ -7,15 +7,23 @@ addBookToLibrary(b);
 addBookToLibrary(c);
 displayLibrary();
 
+class Book{
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author,
+        this.pages = pages;
+        this.read = read;
+    }
 
+};
 
-function Book(title, author, pages, read) {
-    // the constructor...
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
+// function Book(title, author, pages, read) {
+//     // the constructor...
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.read = read;
+// }
 
 let button = document.querySelector("#add");
 button.addEventListener("click", function () {
@@ -53,9 +61,7 @@ library.addEventListener("click", function (event) {
     const bookDiv = readButton.parentNode;
     const index = Array.from(bookDiv.parentNode.children).indexOf(bookDiv);
 
-    console.log(myLibrary[index]);
     changeRead(index);
-    console.log(myLibrary[index])
 })
 
 
